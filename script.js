@@ -21,8 +21,9 @@ const GameBoard = (function gameBoardModule() {
         })
     };
     const isLegal = (pos) => {
-        let desiredCell = document.getElementById(pos); 
-        return !desiredCell.innerText ? true: false;
+        let desiredCell = document.getElementById(pos);
+        if(desiredCell) return !desiredCell.innerText ? true: false;
+        return Error('Square doesn\'t exist');
      };
 
     return {
@@ -31,9 +32,18 @@ const GameBoard = (function gameBoardModule() {
     };
 })();
 
+//players factory 
+const playersFactory = (marker, board) => {
+    return {
+        marker, 
+        move: (pos) => {
+            return pos ? board.isLegal(pos) : null; 
+        }
+    };
+}; 
 
-
-
+const p1 = playersFactory('X', GameBoard);
+const p2 = playersFactory('O', GameBoard);
 
 
 
@@ -42,3 +52,5 @@ const GameBoard = (function gameBoardModule() {
 
 
 GameBoard.render();
+document.getElementById('00').innerText = 'X';
+console.log(p1.move('01'));
