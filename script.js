@@ -2,14 +2,9 @@
 const GameBoard = (function gameBoardModule() {
     let _gameBoardArr;
 
-    const _initSetup = () => {
-       _gameBoardArr = Array(3)
-       .fill()
-       .map(() => Array(3).fill().map(() => 1));
-    };
-    const render = () => {
+    const _initialRender = () => {
+        //initial render of empty board
         const grid = document.querySelector('.grid');
-        _initSetup();
         _gameBoardArr.map((row, rowIndex) => {
             row.map((cell, cellIndex) => {
                 const _id = `${rowIndex}${cellIndex}`; 
@@ -20,6 +15,16 @@ const GameBoard = (function gameBoardModule() {
             })
         })
     };
+    const initSetup = () => {
+        //sets up the board initially
+        _gameBoardArr = Array(3)
+        .fill()
+        .map(() => Array(3).fill().map(() => 1));
+        _initialRender();
+     };
+    const render = () => {
+        //renders new changes to the board
+    };
     const isLegal = (pos) => {
         let desiredCell = document.getElementById(pos);
         if(desiredCell) return !desiredCell.innerText ? true: false;
@@ -27,6 +32,7 @@ const GameBoard = (function gameBoardModule() {
      };
 
     return {
+        initSetup,
         render,
         isLegal
     };
@@ -42,15 +48,19 @@ const playersFactory = (marker, board) => {
     };
 }; 
 
-const p1 = playersFactory('X', GameBoard);
-const p2 = playersFactory('O', GameBoard);
+const GameLoop = (function GameLoopModule() {
+    const initGame = () => {
+        GameBoard.initSetup();
+        const p1 = playersFactory('X', GameBoard);
+        const p2 = playersFactory('O', GameBoard);
+    };
+    
+    return {
+        initGame
+    }
+})();
 
 
+//driver code! 
+GameLoop.initGame();
 
-
-
-
-
-GameBoard.render();
-document.getElementById('00').innerText = 'X';
-console.log(p1.move('01'));
