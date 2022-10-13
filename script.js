@@ -163,7 +163,7 @@ const GameLoop = (function GameLoopModule() {
                         if (winner) {
                             document.querySelector('.winner').innerText = `Winner is ${winner}`
                         }
-                        if (_checkDraw()) {
+                        else if (_checkDraw()) {
                             document.querySelector('.winner').innerText = "It's a draw!"
                         }
 
