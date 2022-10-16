@@ -1,10 +1,21 @@
+:root{
+   --theme-bg: #212121;
+   --ex1: #202124;
+   --ex2: #3C4042; 
+   --ex3: #606368;
+   --ex5: #E77EF9;
+   --ex5: #C38FFF  
+}
+
 *{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
+
 body{
     height: 100vh;
+    background-color: var(--ex1);
 }
 
 .content{
@@ -20,10 +31,125 @@ body{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    width: 200px;
-    height: 200px;
+    width: 400px;
+    height: 400px;
+    margin-bottom: 2rem;
+    border: 2px solid var(--ex2);
 }
 
 .square{ 
-    border: 1px solid #212121;
+    border: 1px solid var(--ex2);
+    font-size: 50px;
+    color: #f1f1f1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.winner {
+    font-size: 50px; 
+    color: #f1f1f1;
+    margin: 20px;
+    text-shadow: 3px 3px 30px var(--ex5);
+}
+
+.reset,
+.reset *,
+.reset :after,
+.reset :before,
+.reset:after,
+.reset:before {
+  border: 0 solid;
+  box-sizing: border-box;
+}
+
+.reset {
+    background-color: var(--ex1);
+    background-image: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 100%;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+}
+.reset:disabled{
+    cursor: default
+}
+.reset{
+    box-sizing: border-box;
+    display: block;
+    font-weight: 900;
+    outline: 4px solid var(--ex3);
+    outline-offset: -4px;
+    overflow: hidden;
+    padding: 1.2rem 3rem;
+    position: relative;
+    text-transform: uppercase;
+    transition: 0.2s linear 0.1s;
+}
+
+.reset:hover {
+    background: var(--ex5);
+    box-shadow: 0 0 5px var(--ex5), 0 0 25px var(--ex5), 0 0 50px var(--ex5),
+      0 0 100px var(--ex5);
+    color: #f1f1f1;
+    outline-color: transparent;
+    transition: 0.2s linear 0.4s;
+  }
+
+  .reset span {
+    display: block;
+    inset: 0;
+    position: absolute;
+  }
+
+  .reset .top {
+    border-top: 4px solid var(--ex5);
+    opacity: 0;
+    transform: translateX(calc(-100% + var(--progress, 0%)));
+    transition: none;
+  }
+
+  .reset:hover .top {
+    --progress: 100%;
+    opacity: 1;
+    transition: transform 0.1s linear;
+  }
+
+  .reset .right {
+    border-right: 4px solid var(--ex5);
+    opacity: 0;
+    transform: translateY(calc(-100% + var(--progress, 0%)));
+    transition: none;
+  }
+  .reset:hover .right {
+    --progress: 100%;
+    opacity: 1;
+    transition: transform 0.2s linear 0.2s;
+  }
+   
+
+  .reset .bottom {
+    border-bottom: 4px solid var(--ex5);
+    opacity: 0;
+    transform: translateX(calc(100% - var(--progress, 0%)));
+    transition: none;
+  }
+  .reset:hover .bottom {
+    --progress: 100%;
+    opacity: 1;
+    transition: transform 0.2s linear 0.3s;
+  }
+
+  .reset .left {
+    border-left: 4px solid var(--ex5);
+    opacity: 0;
+    transform: translateY(calc(100% - var(--progress, 0%)));
+    transition: none;
+  }
+  .reset:hover .left {
+    --progress: 100%;
+    opacity: 1;
+    transition: transform 0.2s linear 0.4s;
+  }
